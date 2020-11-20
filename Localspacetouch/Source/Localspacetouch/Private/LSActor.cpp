@@ -46,11 +46,11 @@ void ALSActor::BeginPlay()
 		if (b)
 		{
 			bshouldmove = true;
-			FVector hpr = hitresult.ImpactPoint - GetActorLocation();
+			FVector hpr = hitresult.ImpactPoint - GetActorLocation();//the relative position to the Localcoord
 			hpr.Z = 0;
 			FVector dir = puppet->GetActorForwardVector();
 			dir.Z = 0;
-			follower->SetRelativeLocation(hpr-(dir*100));
+			follower->SetRelativeLocation(hpr-(dir*5));
 			follower->SetWorldRotation(puppet->GetActorRotation());
 		}
 	});
@@ -77,7 +77,7 @@ void ALSActor::Tick(float DeltaTime)
 			return;
 		}
 		FTransform transform = follower->GetRelativeTransform();
-		FVector hpr = hitresult.ImpactPoint - GetActorLocation();
+		FVector hpr = hitresult.ImpactPoint - GetActorLocation();//the relative position to the Localcoord
 		float dis = FVector::Dist(hpr, transform.GetLocation());
 #define keepdis 2
 		if (dis > keepdis)
